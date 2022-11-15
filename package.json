@@ -1,0 +1,23 @@
+{
+  "name": "bank_tech_test_new_dir",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Dmum303/Bank-tech-test-new-dir.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Dmum303/Bank-tech-test-new-dir/issues"
+  },
+  "homepage": "https://github.com/Dmum303/Bank-tech-test-new-dir#readme",
+  "dependencies": {
+    "jest": "^29.3.1"
+  }
+}
