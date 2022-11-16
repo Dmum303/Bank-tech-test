@@ -106,7 +106,7 @@ describe('bank', () => {
     expect(bank.sortArrayByDate()[0].formattedDate).toEqual('14/11/2022');
   });
 
-  it('Returns  statement', () => {
+  it('Returns statement with each line seperated by line escape', () => {
     const bank = new Bank();
     bank.addTransaction(mockDeposit);
     expect(bank.returnStatement()).toEqual(
@@ -114,7 +114,7 @@ describe('bank', () => {
     );
   });
 
-  it('Returns statement', () => {
+  it('Returns statement with each line seperated by line escape', () => {
     const bank = new Bank();
     bank.addTransaction(mockWithdrawl);
     bank.addTransaction(mockDeposit);

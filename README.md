@@ -19,5 +19,6 @@ as I created a new repo and copied the files accross from the existing project. 
 
 <!-- This is an app in which a user is able to create a transaction to desposit or withdraw funds from
 their bank account. It will then produce a statement reflecting the account's activity.
-There is a class for the transaction: transaction.js and the bank account which will produce the statement:
-bank.js. Each class has it's own test suit and there is a intergration test to check real world applicability. -->
+There is a class for the transaction: transaction.js and the bank account, which takes instances of the transaction class,
+and then will produce the statement:
+bank.js. Each class has it's own test suit and there is a intergration test to check joint functionality. -->

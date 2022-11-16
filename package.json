@@ -19,5 +19,8 @@
   "homepage": "https://github.com/Dmum303/Bank-tech-test-new-dir#readme",
   "dependencies": {
     "jest": "^29.3.1"
+  },
+  "devDependencies": {
+    "eslint": "^8.27.0"
   }
 }
