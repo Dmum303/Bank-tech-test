@@ -9,7 +9,7 @@ class Bank {
     if (typeof transaction === 'object') {
       this.bankAccountArray.push(transaction);
     } else {
-      return 'Please only input transaction objects';
+      throw 'Please only input transaction objects';
     }
   }
 
@@ -22,6 +22,8 @@ class Bank {
       return date + ' || ' + amount + ' || || ' + total.toFixed(2);
     } else if (type === 'debit') {
       return date + ' || || ' + amount + ' || ' + total.toFixed(2);
+    } else {
+      throw 'Transaction credit/debit name error';
     }
   }
 
@@ -34,6 +36,8 @@ class Bank {
       this.total += amount;
     } else if (type === 'debit') {
       this.total -= amount;
+    } else {
+      throw 'Transaction credit/debit name error';
     }
     return this.total;
   }
@@ -65,6 +69,7 @@ class Bank {
     let finalStatementArray = this.produceStatement();
     finalStatementArray.unshift('date || credit || debit || balance');
     let joinedStatementWithLineEscape = finalStatementArray.join('\n');
+    console.log(joinedStatementWithLineEscape);
     return joinedStatementWithLineEscape;
   }
 }

@@ -17,6 +17,13 @@ describe('bank', () => {
     date: date2,
   };
 
+  const mockError = {
+    amount: 200,
+    type: 'dsfhgjhfj',
+    formattedDate: '12/11/2022',
+    date: date2,
+  };
+
   it('returns an empty bankAccountArray', () => {
     const bank = new Bank();
     expect(bank.bankAccountArray).toEqual([]);
@@ -43,16 +50,16 @@ describe('bank', () => {
   // mock of that class, if anyone could enlighten me I would appreciate it.
 
   it('addTransaction Only accepts objects as input', () => {
-    const bank = new Bank();
-    expect(bank.addTransaction('string')).toEqual(
-      'Please only input transaction objects'
-    );
-    expect(bank.addTransaction(123456)).toEqual(
-      'Please only input transaction objects'
-    );
-    expect(bank.addTransaction()).toEqual(
-      'Please only input transaction objects'
-    );
+    expect(() => {
+      const bank = new Bank();
+      bank
+        .addTransaction('string')
+        .toThrow('Please only input transaction objects');
+      bank
+        .addTransaction(123456)
+        .toThrow('Please only input transaction objects');
+      bank.addTransaction().toThrow('Please only input transaction objects');
+    });
   });
 
   it('Turns transaction into string with stringTransaction method', () => {
@@ -65,6 +72,15 @@ describe('bank', () => {
     );
   });
 
+  it('stringTransaction Throws an error if credit/debit not entered correctly', () => {
+    expect(() => {
+      const bank = new Bank();
+      bank
+        .stringTransaction(mockError, -200)
+        .toThrow('Transaction credit/debit name error');
+    });
+  });
+
   it('Keeps a running total of credit/debits with runningTotal method', () => {
     const bank = new Bank();
     expect(bank.total).toEqual(0);
@@ -72,6 +88,15 @@ describe('bank', () => {
     expect(bank.runningTotal(mockDeposit)).toEqual(1000);
     expect(bank.runningTotal(mockWithdrawl)).toEqual(800);
     expect(bank.runningTotal(mockWithdrawl)).toEqual(600);
+  });
+
+  it('runningTotal throws an error if credit/debit not entered correctly', () => {
+    expect(() => {
+      const bank = new Bank();
+      bank
+        .runningTotal(mockError)
+        .toThrow('Transaction credit/debit name error');
+    });
   });
 
   it('inserts transaction into statement array with produceStatement method', () => {

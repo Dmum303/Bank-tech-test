@@ -8,16 +8,28 @@ describe('transaction', () => {
   });
 
   it('Returns amount must be number if input not number', () => {
-    const transaction = new Transaction();
-    expect(transaction.addAmount('Chips')).toEqual(
-      'Amount must be a number, with no more than 2 decimal places'
-    );
-    expect(transaction.addAmount('500')).toEqual(
-      'Amount must be a number, with no more than 2 decimal places'
-    );
-    expect(transaction.addAmount('!@£$%^&')).toEqual(
-      'Amount must be a number, with no more than 2 decimal places'
-    );
+    expect(() => {
+      const transaction = new Transaction();
+      transaction
+        .addAmount('Chips')
+        .toThrow('Amount must be a number, with no more than 2 decimal places');
+      transaction
+        .addAmount('500')
+        .toThrow('Amount must be a number, with no more than 2 decimal places');
+      transaction
+        .addAmount('!@£$%^&')
+        .toThrow('Amount must be a number, with no more than 2 decimal places');
+    });
+    // const transaction = new Transaction();
+    // expect(transaction.addAmount('Chips')).toEqual(
+    //   'Amount must be a number, with no more than 2 decimal places'
+    // );
+    // expect(transaction.addAmount('500')).toEqual(
+    //   'Amount must be a number, with no more than 2 decimal places'
+    // );
+    // expect(transaction.addAmount('!@£$%^&')).toEqual(
+    //   'Amount must be a number, with no more than 2 decimal places'
+    // );
   });
 
   it('Checks that number is no more than 2 decimal places', () => {
@@ -31,12 +43,13 @@ describe('transaction', () => {
   });
 
   it('Can add amount with 2 decimal places', () => {
-    const transaction = new Transaction();
-    expect(transaction.addAmount(10.55737)).toEqual(
-      'Amount must be a number, with no more than 2 decimal places'
-    );
-    transaction.addAmount(500.45);
-    expect(transaction.amount).toEqual(500.45);
+    expect(() => {
+      const transaction = new Transaction();
+      transaction
+        .addAmount(10.55737)
+        .toThrow('Amount must be a number, with no more than 2 decimal places');
+      transaction.addAmount(500.45).toEqual(500.45);
+    });
   });
 
   it('adds todays date as date object to model', () => {
@@ -58,17 +71,18 @@ describe('transaction', () => {
   });
 
   it('Records type of transaction, returns msg if invalid input', () => {
+    expect(() => {
+      const transaction = new Transaction();
+      transaction
+        .addType('dfhjhartsrjytk')
+        .toThrow('Please only enter credit or debit');
+      transaction.addType().toThrow('Please only enter credit or debit');
+      transaction.addType(123456).toThrow('Please only enter credit or debit');
+    });
     const transaction = new Transaction();
     transaction.addType('credit');
     expect(transaction.type).toEqual('credit');
     transaction.addType('debit');
     expect(transaction.type).toEqual('debit');
-    expect(transaction.addType('dfhjhartsrjytk')).toEqual(
-      'Please only enter credit or debit'
-    );
-    expect(transaction.addType(123456)).toEqual(
-      'Please only enter credit or debit'
-    );
-    expect(transaction.addType()).toEqual('Please only enter credit or debit');
   });
 });

@@ -16,7 +16,7 @@ class Transaction {
     if (typeof amount === 'number' && this.check2Decimal(amount)) {
       this.amount += amount;
     } else {
-      return 'Amount must be a number, with no more than 2 decimal places';
+      throw 'Amount must be a number, with no more than 2 decimal places';
     }
   }
 
@@ -41,7 +41,7 @@ class Transaction {
     if (type === 'credit' || type === 'debit') {
       this.type = type;
     } else {
-      return 'Please only enter credit or debit';
+      throw 'Please only enter credit or debit';
     }
   }
 }
